@@ -13,6 +13,9 @@ import {
   IonPage,
 } from "@ionic/react";
 import { useMutation } from "@tanstack/react-query";
+import { useHistory } from "react-router";
+import useUserStore, { UserType } from "../context/user";
+import { FetchError } from "../utils/fetchJson";
 
 interface onSubmitValues {
   username: string;
@@ -20,26 +23,48 @@ interface onSubmitValues {
 }
 
 const Home = (): JSX.Element => {
-  const { data, mutate } = useMutation({
+  let history = useHistory();
+  const authenticate = useUserStore((state) => state.authenticate);
+
+  const { data, isError, error, mutateAsync } = useMutation({
     mutationFn: async (values: onSubmitValues) => {
-      const res = await fetch("https://apitest.enegic.com/createtoken", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_ENDPOINT}/createtoken`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+
+      // Throw onError
+      if (!res.ok) {
+        throw new FetchError({ message: "Unauthorized", status: res.status });
+      }
 
       const data = await res.json();
 
-      return data;
+      return {
+        ...data,
+        UserLogin: { Username: values.username, Password: values.password },
+      };
+    },
+    onSuccess: (data: UserType) => {
+      console.log({ message: "Success", data });
+      authenticate(data);
+      history.push("/dashboard/");
+    },
+    onError: (error) => {
+      console.log({ message: "Error", error });
     },
   });
 
-  console.log(data);
+  console.log(data, isError, error);
 
-  const onSubmit = (values: onSubmitValues): void => {
-    mutate(values)
+  const onSubmit = async (values: onSubmitValues): Promise<void> => {
+    await mutateAsync(values);
   };
 
   return (
@@ -94,6 +119,7 @@ const Home = (): JSX.Element => {
                         </IonItem>
                       )}
                     />
+                    {error instanceof FetchError && <p>{error.message}</p>}
                     <div
                       style={{
                         width: "100%",

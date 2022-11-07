@@ -22,6 +22,8 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import Dashboard from "./pages/Dashboard";
+import Refresh from "./context/Refresh";
 
 
 setupIonicReact();
@@ -33,9 +35,13 @@ const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
     <IonApp>
       <IonReactRouter>
+        <Refresh />
         <IonRouterOutlet>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
           </Route>
         </IonRouterOutlet>
       </IonReactRouter>
