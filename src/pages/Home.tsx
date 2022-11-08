@@ -61,7 +61,7 @@ const Home = (): JSX.Element => {
     },
   });
 
-  console.log(data, isError, error);
+  console.log(data, isError, error, "Hello");
 
   const onSubmit = async (values: onSubmitValues): Promise<void> => {
     await mutateAsync(values);
