@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useHistory, useLocation } from "react-router";
 import useUserStore from "./user";
 
-const twentyMinutesInMs = 20 * 60 * 1000;
+const refreshTime = 35 * 1000;
 
 const Refresh = (): JSX.Element => {
   const user = useUserStore();
@@ -23,13 +23,13 @@ const Refresh = (): JSX.Element => {
 
       if (now > validTo) {
         console.log("Users Token expired");
-        history.push("/");
+        if (location.pathname !== "/") history.push("/")
         return null;
       }
 
       const timeLeft = validTo.getTime() - now.getTime();
 
-      if (timeLeft > twentyMinutesInMs) {
+      if (timeLeft > refreshTime) {
         console.log("Users Token is still valid");
         return null;
       }
@@ -71,10 +71,10 @@ const Refresh = (): JSX.Element => {
     retryOnMount: false,
     //staleTime: 15 * 60 * 1000,
     cacheTime: 0,
-    refetchInterval: 5 * 1000,
+    refetchInterval: 30 * 1000,
     refetchIntervalInBackground: false,
     refetchOnMount: false,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     refetchOnReconnect: false,
 
   });
