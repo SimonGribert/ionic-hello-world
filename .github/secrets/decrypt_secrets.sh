@@ -2,7 +2,7 @@
 set -eo pipefail
 
 gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output ./.github/secrets/Ionic_hello_world_test.mobileprovision.mobileprovision ./.github/secrets/Ionic_hello_world_test.mobileprovision.gpg
-gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output ./.github/secrets/ios_distribution.cer ./.github/secrets/ios_distribution.cer.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$IOS_KEYS" --output ./.github/secrets/ios_distribution.cer ./.github/secrets/ios_dist.cer.gpg
 
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 
