@@ -10,8 +10,8 @@
 	<true/>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.tiagosanto.calculatorIOS</key>
-		<string>match AppStore com.tiagosanto.calculatorIOS</string>
+		<key>ionic-hello-world.enegic.com</key>
+		<string>match AppStore ionic-hello-world.enegic.com</string>
 	</dict>
 </dict>
 </plist>
