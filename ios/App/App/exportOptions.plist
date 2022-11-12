@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>ionic-hello-world.enegic.com</key>
-		<string>match AppStore ionic-hello-world.enegic.com</string>
+		<string>0a0a7be4-b3d3-4dc0-aeeb-4858bbd01024</string>
 	</dict>
 </dict>
 </plist>
