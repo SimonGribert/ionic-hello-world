@@ -26,7 +26,7 @@ jobs:
       #     ./.github/scripts/archive_app.sh
       - name: Exporting .ipa
         run: |
-          chmod +x ./.github/scripts/archive_app.sh
+          chmod +x ./.github/scripts/export_ipa.sh
           ./.github/scripts/export_ipa.sh
       - name: Publishing app
         if: success()
