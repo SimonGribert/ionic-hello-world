@@ -19,7 +19,9 @@ jobs:
           chmod +x ./.github/secrets/decrypt_secrets.sh
           ./.github/secrets/decrypt_secrets.sh
       - name: Install Ionic
-        run: npm install -g @ionic/cli  
+        run: |
+          npm install -g @ionic/cli  
+          npm install
       - name: Build ipa
         run: ionic capacitor build ios --release --prod --no-open
       - name: Archiving project
