@@ -16,14 +16,18 @@ jobs:
         env:
           IOS_KEYS: ${{ secrets.IOS_KEYS }}
         run: |
-         chmod +x ./.github/secrets/decrypt_secrets.sh
-         ./.github/secrets/decrypt_secrets.sh
+          chmod +x ./.github/secrets/decrypt_secrets.sh
+          ./.github/secrets/decrypt_secrets.sh
       - name: Archiving project
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        run: ./.github/scripts/archive_app.sh
+        run: |
+          chmod +x ./.github/scripts/archive_app.sh
+          ./.github/scripts/archive_app.sh
       - name: Exporting .ipa
-        run: ./.github/scripts/export_ipa.sh
+        run: |
+          chmod +x ./.github/scripts/archive_app.sh
+          ./.github/scripts/export_ipa.sh
       - name: Publishing app
         if: success()
         env:
