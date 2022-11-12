@@ -24,6 +24,8 @@ jobs:
         run: |
           chmod +x ./.github/scripts/archive_app.sh
           ./.github/scripts/archive_app.sh
+      - name: Build ipa
+        run: ionic capacitor build ios --release --prod --no-open
       - name: Exporting .ipa
         run: |
           chmod +x ./.github/scripts/export_ipa.sh
