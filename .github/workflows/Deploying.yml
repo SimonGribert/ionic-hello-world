@@ -18,12 +18,12 @@ jobs:
         run: |
           chmod +x ./.github/secrets/decrypt_secrets.sh
           ./.github/secrets/decrypt_secrets.sh
-      # - name: Archiving project
-      #   env:
-      #     PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-      #   run: |
-      #     chmod +x ./.github/scripts/archive_app.sh
-      #     ./.github/scripts/archive_app.sh
+      - name: Archiving project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: |
+          chmod +x ./.github/scripts/archive_app.sh
+          ./.github/scripts/archive_app.sh
       - name: Exporting .ipa
         run: |
           chmod +x ./.github/scripts/export_ipa.sh
